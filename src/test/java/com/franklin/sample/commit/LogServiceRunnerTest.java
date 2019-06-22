@@ -1,7 +1,7 @@
-package com.franklin.sample.logging;
+package com.franklin.sample.commit;
 
-import com.franklin.sample.logging.reader.ReadService;
-import com.franklin.sample.logging.writer.WriteService;
+import com.franklin.sample.commit.reader.ReadService;
+import com.franklin.sample.commit.writer.WriteService;
 import com.google.common.collect.ImmutableMap;
 import org.junit.Test;
 
@@ -17,11 +17,11 @@ public class LogServiceRunnerTest {
     config.setLogPath("path");
 
     LogServiceFactory logServiceFactory = mock(LogServiceFactory.class);
-    WriteService writeServer = mock(WriteService.class);
-    ReadService readServer = mock(ReadService.class);
+    WriteService writeService = mock(WriteService.class);
+    ReadService readService = mock(ReadService.class);
 
-    when(logServiceFactory.createLogService(Mode.WRITER)).thenReturn(writeServer);
-    when(logServiceFactory.createLogService(Mode.READER)).thenReturn(readServer);
+    when(logServiceFactory.createLogService(Mode.WRITER)).thenReturn(writeService);
+    when(logServiceFactory.createLogService(Mode.READER)).thenReturn(readService);
 
     LogServiceRunner logServiceRunner = new LogServiceRunner(logServiceFactory);
     logServiceRunner.run("-mode", "READER");
@@ -29,7 +29,7 @@ public class LogServiceRunnerTest {
 
     verify(logServiceFactory).createLogService(Mode.WRITER);
     verify(logServiceFactory).createLogService(Mode.READER);
-    verify(writeServer).start();
-    verify(readServer).start();
+    verify(writeService).start();
+    verify(readService).start();
   }
 }

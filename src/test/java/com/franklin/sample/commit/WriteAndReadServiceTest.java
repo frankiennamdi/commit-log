@@ -1,4 +1,4 @@
-package com.franklin.sample.logging;
+package com.franklin.sample.commit;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
@@ -44,19 +44,19 @@ public class WriteAndReadServiceTest {
 
     LogServiceFactory logServiceFactory = new LogServiceFactory(config);
 
-    LogService writeServer = logServiceFactory.createLogService(Mode.WRITER);
-    writeServer.start();
+    LogService writeService = logServiceFactory.createLogService(Mode.WRITER);
+    writeService.start();
 
-    LogService readServer = logServiceFactory.createLogService(Mode.READER);
-    readServer.start();
+    LogService readService = logServiceFactory.createLogService(Mode.READER);
+    readService.start();
 
     Thread.sleep(3000);
 
 
-    writeServer.shutdown();
-    readServer.shutdown();
-    writeServer.join();
-    readServer.join();
+    writeService.shutdown();
+    readService.shutdown();
+    writeService.join();
+    readService.join();
 
     String output = outputCapture.toString();
     String[] lines = output.split("\n");

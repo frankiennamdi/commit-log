@@ -1,4 +1,4 @@
-package com.franklin.sample.logging;
+package com.franklin.sample.commit;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

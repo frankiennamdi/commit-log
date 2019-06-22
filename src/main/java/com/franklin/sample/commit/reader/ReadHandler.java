@@ -1,6 +1,6 @@
-package com.franklin.sample.logging.reader;
+package com.franklin.sample.commit.reader;
 
-import com.franklin.sample.logging.LogHandler;
+import com.franklin.sample.commit.LogHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

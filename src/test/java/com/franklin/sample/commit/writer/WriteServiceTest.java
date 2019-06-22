@@ -1,6 +1,6 @@
-package com.franklin.sample.logging.writer;
+package com.franklin.sample.commit.writer;
 
-import com.franklin.sample.logging.*;
+import com.franklin.sample.commit.*;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.FileUtils;

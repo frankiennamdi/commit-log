@@ -1,4 +1,4 @@
-package com.franklin.sample.logging;
+package com.franklin.sample.commit;
 
 import com.beust.jcommander.JCommander;
 import org.slf4j.Logger;

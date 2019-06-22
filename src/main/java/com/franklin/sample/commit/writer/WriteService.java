@@ -1,9 +1,9 @@
-package com.franklin.sample.logging.writer;
+package com.franklin.sample.commit.writer;
 
-import com.franklin.sample.logging.Config;
-import com.franklin.sample.logging.LogHandler;
-import com.franklin.sample.logging.LogService;
-import com.franklin.sample.logging.Mode;
+import com.franklin.sample.commit.Config;
+import com.franklin.sample.commit.LogHandler;
+import com.franklin.sample.commit.LogService;
+import com.franklin.sample.commit.Mode;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

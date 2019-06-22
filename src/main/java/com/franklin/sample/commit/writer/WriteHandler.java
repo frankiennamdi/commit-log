@@ -1,6 +1,6 @@
-package com.franklin.sample.logging.writer;
+package com.franklin.sample.commit.writer;
 
-import com.franklin.sample.logging.LogHandler;
+import com.franklin.sample.commit.LogHandler;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

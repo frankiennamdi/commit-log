@@ -1,4 +1,4 @@
-package com.franklin.sample.logging.reader;
+package com.franklin.sample.commit.reader;
 
 import org.apache.commons.lang3.StringUtils;
 

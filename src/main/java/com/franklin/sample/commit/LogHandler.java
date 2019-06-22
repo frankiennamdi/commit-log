@@ -1,4 +1,4 @@
-package com.franklin.sample.logging;
+package com.franklin.sample.commit;
 
 /**
  * Base interface for LogHandler, worker for the {@link LogService}

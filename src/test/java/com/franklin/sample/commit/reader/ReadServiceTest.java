@@ -1,6 +1,6 @@
-package com.franklin.sample.logging.reader;
+package com.franklin.sample.commit.reader;
 
-import com.franklin.sample.logging.*;
+import com.franklin.sample.commit.*;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.FileUtils;

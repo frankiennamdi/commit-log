@@ -1,4 +1,4 @@
-package com.franklin.sample.logging.writer;
+package com.franklin.sample.commit.writer;
 
 import org.slf4j.helpers.MessageFormatter;
 

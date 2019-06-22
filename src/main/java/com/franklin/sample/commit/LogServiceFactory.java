@@ -1,7 +1,7 @@
-package com.franklin.sample.logging;
+package com.franklin.sample.commit;
 
-import com.franklin.sample.logging.reader.ReadService;
-import com.franklin.sample.logging.writer.WriteService;
+import com.franklin.sample.commit.reader.ReadService;
+import com.franklin.sample.commit.writer.WriteService;
 import com.google.common.base.Joiner;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -38,7 +38,7 @@ public class LogServiceFactory {
       file = new File(Joiner.on("/").join(path, config.getLogPath()));
     }
 
-    LOGGER.info("Starting Log Server in {} mode", mode.name());
+    LOGGER.info("Starting Log Service in {} mode", mode.name());
     LOGGER.info("Log Location {}", file.getAbsolutePath());
 
     LogService logService = null;

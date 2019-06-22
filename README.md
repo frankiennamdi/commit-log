@@ -38,6 +38,10 @@ Start the write service
 
 **Output:**
 ```
+[main] - Starting Log Service in WRITER mode
+[main] - Log Location /Users/[WORKING DIR]/commit-log/commit.log
+[main] - Writers [A=2, B=3]
+[Thread-3] - Running in WRITER mode
 [WRITER-1] - A: 234: TtMsRrZfFVSf
 [WRITER-2] - A: 233: ZpULlFFYGYQnVjyrAVPzhhzSeJ
 [WRITER-5] - B: 351: YsWdapXEaBTxpkSk

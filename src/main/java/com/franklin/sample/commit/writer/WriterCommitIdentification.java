@@ -1,4 +1,4 @@
-package com.franklin.sample.logging.writer;
+package com.franklin.sample.commit.writer;
 
 import java.util.concurrent.atomic.AtomicLong;
 
