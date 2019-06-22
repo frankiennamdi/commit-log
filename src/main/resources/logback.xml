@@ -1,0 +1,22 @@
+<configuration>
+  <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>[%thread] - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="APP_STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="com.franklin.sample" level="INFO" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+  <root level="ERROR">
+    <appender-ref ref="APP_STDOUT"/>
+    <appender-ref ref="STDOUT"/>
+  </root>
+</configuration>
