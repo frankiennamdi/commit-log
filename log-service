@@ -2,4 +2,4 @@
 
 VERSION=$(./gradlew properties --no-daemon --console=plain -q | grep "^version:" | awk '{printf $2}')
 LIB="build/libs/commit-log-$VERSION.jar"
-java -jar $LIB "$@"
+exec java -jar $LIB "$@"
