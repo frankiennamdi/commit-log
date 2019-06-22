@@ -12,7 +12,6 @@ import org.junit.rules.TemporaryFolder;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class WriterServerTest {
+public class WriteServiceTest {
 
   @Rule
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
@@ -40,11 +39,11 @@ public class WriterServerTest {
 
     String filePath = Joiner.on("/").join(path, "commit.log");
     config.setLogPath(filePath);
-    LogServer logServer = new LogServerFactory(config).createLogServer(Mode.WRITER);
-    logServer.start();
+    LogService logService = new LogServiceFactory(config).createLogService(Mode.WRITER);
+    logService.start();
     Thread.sleep(2000);
-    logServer.shutdown();
-    logServer.join();
+    logService.shutdown();
+    logService.join();
 
     List<String> fileLines = FileUtils.readLines(new File(filePath), StandardCharsets.UTF_8);
     String regex = "(?<cid>\\w+):\\s(?<uuid>\\d+)";

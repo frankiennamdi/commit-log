@@ -23,7 +23,7 @@ import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.isIn;
 import static org.junit.Assert.assertThat;
 
-public class ReadServerTest {
+public class ReadServiceTest {
 
   @Rule
   public OutputCapture outputCapture = new OutputCapture();
@@ -31,7 +31,7 @@ public class ReadServerTest {
   @Test
   public void testReadFile() throws URISyntaxException, InterruptedException, IOException {
     ClassLoader classLoader = MoreObjects.firstNonNull(Thread.currentThread().getContextClassLoader(),
-            ReadServerTest.class.getClassLoader());
+            ReadServiceTest.class.getClassLoader());
     URI uri = classLoader.getResource("sample_files/sample_commit.log").toURI();
     Path logPath = Paths.get(uri);
 
@@ -41,11 +41,11 @@ public class ReadServerTest {
             .put("B", 3)
             .build());
     config.setLogPath(logPath.toAbsolutePath().toString());
-    LogServer logServer = new LogServerFactory(config).createLogServer(Mode.READER);
-    logServer.start();
+    LogService logService = new LogServiceFactory(config).createLogService(Mode.READER);
+    logService.start();
     Thread.sleep(3000);
-    logServer.shutdown();
-    logServer.join();
+    logService.shutdown();
+    logService.join();
 
     String output = outputCapture.toString();
     String[] lines = output.split("\n");

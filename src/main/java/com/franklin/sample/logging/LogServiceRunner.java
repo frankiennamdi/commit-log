@@ -12,15 +12,15 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class LogServerRunner implements CommandLineRunner {
+public class LogServiceRunner implements CommandLineRunner {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(LogServerRunner.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(LogServiceRunner.class);
 
-  private final LogServerFactory logServerFactory;
+  private final LogServiceFactory logServiceFactory;
 
   @Autowired
-  public LogServerRunner(LogServerFactory logServerFactory) {
-    this.logServerFactory = logServerFactory;
+  public LogServiceRunner(LogServiceFactory logServiceFactory) {
+    this.logServiceFactory = logServiceFactory;
   }
 
   @Override
@@ -30,15 +30,15 @@ public class LogServerRunner implements CommandLineRunner {
             .addObject(command)
             .build()
             .parse(arguments);
-    LogServer logServer = logServerFactory.createLogServer(command.getMode());
+    LogService logService = logServiceFactory.createLogService(command.getMode());
     Runtime.getRuntime().addShutdownHook(new Thread(() -> {
       try {
-        logServer.shutdown();
-        logServer.join();
+        logService.shutdown();
+        logService.join();
       } catch (InterruptedException e) {
         LOGGER.warn(e.getMessage(), e);
       }
     }));
-    logServer.start();
+    logService.start();
   }
 }

@@ -1,7 +1,7 @@
 # Description
 
-This project simulates read and write log servers. The write server produces data
-and the read server consumes it.
+This project simulates read and write log services. The write service produces data
+and the read service consumes it.
 
 # Technologies
 1. gradle (included)
@@ -30,10 +30,10 @@ recreated, in the future we can configure it to append and roll over as improvem
 
 ## In Terminal 1:
 
-Start the write server
+Start the write service
 
 ```
-./log-server -mode WRITER
+./log-service -mode WRITER
 ```
 
 **Output:**
@@ -49,10 +49,10 @@ Start the write server
 
 ## In Terminal 2:
 
-Start the write server
+Start the write service
 
 ```
-./log-server -mode READER
+./log-service -mode READER
 ```
 
 **Output**
@@ -72,3 +72,4 @@ Start the write server
 ```
 Ctrl+c
 ```
+

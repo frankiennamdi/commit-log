@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.isIn;
 import static org.junit.Assert.assertThat;
 
-public class WriterAndReaderTest {
+public class WriteAndReadServiceTest {
 
   @Rule
   public OutputCapture outputCapture = new OutputCapture();
@@ -42,12 +42,12 @@ public class WriterAndReaderTest {
     config.setWriters(threadConfig);
     config.setReaders(threadConfig);
 
-    LogServerFactory logServerFactory = new LogServerFactory(config);
+    LogServiceFactory logServiceFactory = new LogServiceFactory(config);
 
-    LogServer writeServer = logServerFactory.createLogServer(Mode.WRITER);
+    LogService writeServer = logServiceFactory.createLogService(Mode.WRITER);
     writeServer.start();
 
-    LogServer readServer = logServerFactory.createLogServer(Mode.READER);
+    LogService readServer = logServiceFactory.createLogService(Mode.READER);
     readServer.start();
 
     Thread.sleep(3000);

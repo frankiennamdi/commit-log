@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * LogServer configuration
+ * LogService configuration
  */
 
 @Component
-@ConfigurationProperties(prefix = "app.logserver")
+@ConfigurationProperties(prefix = "app.log-service")
 public class Config {
 
   private Map<String, Integer> writers;

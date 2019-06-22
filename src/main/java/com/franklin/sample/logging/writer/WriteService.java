@@ -2,7 +2,7 @@ package com.franklin.sample.logging.writer;
 
 import com.franklin.sample.logging.Config;
 import com.franklin.sample.logging.LogHandler;
-import com.franklin.sample.logging.LogServer;
+import com.franklin.sample.logging.LogService;
 import com.franklin.sample.logging.Mode;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -17,9 +17,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
-public class WriteServer extends LogServer {
+public class WriteService extends LogService {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(WriteServer.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(WriteService.class);
 
   private final ExecutorService executorService;
 
@@ -27,10 +27,10 @@ public class WriteServer extends LogServer {
 
   private volatile boolean running;
 
-  public WriteServer(Config config, Path filePath) {
+  public WriteService(Config config, Path filePath) {
     ThreadFactory threadFactory = new CustomizableThreadFactory(Mode.WRITER.name() + "-");
-    int total = config.getWriters().values().stream().mapToInt(Integer::intValue).sum();
-    this.executorService = Executors.newFixedThreadPool(total, threadFactory);
+    int totalNumOfWriterThreads = config.getWriters().values().stream().mapToInt(Integer::intValue).sum();
+    this.executorService = Executors.newFixedThreadPool(totalNumOfWriterThreads, threadFactory);
     this.writeHandlers = writeHandlers(config, filePath);
   }
 
@@ -66,7 +66,7 @@ public class WriteServer extends LogServer {
         Thread.interrupted();
       }
     }
-    LOGGER.info("WriteServer shutdown");
+    LOGGER.info("WriteService shutdown");
   }
 
   public void shutdown() {

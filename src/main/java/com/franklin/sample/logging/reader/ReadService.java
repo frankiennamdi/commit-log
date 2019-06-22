@@ -2,7 +2,7 @@ package com.franklin.sample.logging.reader;
 
 import com.franklin.sample.logging.Config;
 import com.franklin.sample.logging.LogHandler;
-import com.franklin.sample.logging.LogServer;
+import com.franklin.sample.logging.LogService;
 import com.franklin.sample.logging.Mode;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -16,9 +16,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class ReadServer extends LogServer {
+public class ReadService extends LogService {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(ReadServer.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ReadService.class);
 
   private volatile boolean running;
 
@@ -26,9 +26,9 @@ public class ReadServer extends LogServer {
 
   private final List<ReadHandler> readHandlers;
 
-  public ReadServer(Config config, Path filePath) {
-    int total = config.getReaders().values().stream().mapToInt(Integer::intValue).sum();
-    this.executorService = Executors.newFixedThreadPool(total,
+  public ReadService(Config config, Path filePath) {
+    int totalNumberOfReaderThreads = config.getReaders().values().stream().mapToInt(Integer::intValue).sum();
+    this.executorService = Executors.newFixedThreadPool(totalNumberOfReaderThreads,
             new CustomizableThreadFactory(Mode.READER.name() + "-"));
     this.readHandlers = readHandlers(config, filePath);
   }
@@ -52,7 +52,7 @@ public class ReadServer extends LogServer {
 
       }
     }
-    LOGGER.info("ReadServer shutdown");
+    LOGGER.info("ReadService shutdown");
   }
 
   private List<ReadHandler> readHandlers(Config config, Path filePath) {
