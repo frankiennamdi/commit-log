@@ -30,7 +30,9 @@ public class LogServiceRunner implements CommandLineRunner {
             .addObject(command)
             .build()
             .parse(arguments);
+
     LogService logService = logServiceFactory.createLogService(command.getMode());
+
     Runtime.getRuntime().addShutdownHook(new Thread(() -> {
       try {
         logService.shutdown();
@@ -39,6 +41,7 @@ public class LogServiceRunner implements CommandLineRunner {
         LOGGER.warn(e.getMessage(), e);
       }
     }));
+
     logService.start();
   }
 }

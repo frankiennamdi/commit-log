@@ -41,24 +41,23 @@ public class LogServiceFactory {
     LOGGER.info("Starting Log Service in {} mode", mode.name());
     LOGGER.info("Log Location {}", file.getAbsolutePath());
 
-    LogService logService = null;
     try {
       if (mode.equals(Mode.WRITER)) {
         LOGGER.info("Writers {}", Arrays.toString(config.getWriters().entrySet().toArray()));
         FileUtils.deleteQuietly(file);
         FileUtils.touch(file);
-        logService = new WriteService(config, file.toPath());
+        return new WriteService(config, file.toPath());
 
       } else if (mode.equals(Mode.READER)) {
         LOGGER.info("Readers {}", Arrays.toString(config.getReaders().entrySet().toArray()));
         if (!Files.exists(file.toPath())) {
           throw new RuntimeException("File does not exist " + file.getAbsolutePath());
         }
-        logService = new ReadService(config, file.toPath());
+        return new ReadService(config, file.toPath());
       }
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    return logService;
+    return null;
   }
 }

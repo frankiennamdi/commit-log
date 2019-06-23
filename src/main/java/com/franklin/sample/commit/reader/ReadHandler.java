@@ -27,6 +27,7 @@ class ReadHandler implements LogHandler {
   @Override
   public void run() {
     int sleepTimeInMillis = 500;
+
     while (running) {
       try {
         Optional<String> nextLine = concurrentCommitFileReader.nextLine();
@@ -40,6 +41,7 @@ class ReadHandler implements LogHandler {
         LOGGER.warn("Thread Interrupted {}", interrupted);
       }
     }
+
     LOGGER.info("Handler Shutdown");
     concurrentCommitFileReader.close();
   }
