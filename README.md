@@ -67,8 +67,7 @@ Start the write service
 **Output**
 ```
 [main] - Starting Log Service in READER mode
-[main] - Log Location /Users/frankie/Documents/SOURCE/SAMPLES/interactions/commit-log/commit.log
-[main] - Readers [A=2, B=3]
+[main] - Log Location /Users/[WORKING DIR]/commit-log/commit.log[main] - Readers [A=2, B=3]
 [Thread-3] - Running in READER mode
 [READER-2] - A: 109: TSpWtrjouG
 [READER-2] - A: 110: yNnGsuZorhOOCjdWSLvbCBX
@@ -89,4 +88,4 @@ Ctrl+c
 #Future Improvements
 
 1. More testing.
-2. Rolling file based on date or size or start time.
+2. Rolling file to backup based on date or size or start time.
