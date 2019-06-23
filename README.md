@@ -24,6 +24,11 @@ Test are included and test the reading and writing of log information
 The configuration property file is located in **config** directory. If the path of the log
 location is not absolute the log is written in the present working directory.
 
+# Constraints
+
+The writer must be started before the reader. If this order is not followed the reader shutdowns
+after a failed check.
+
 # Execution
 Below are some examples of how to execute the application. The log file is always
 recreated, in the future we can configure it to append and roll over as improvements.
@@ -61,6 +66,10 @@ Start the write service
 
 **Output**
 ```
+[main] - Starting Log Service in READER mode
+[main] - Log Location /Users/frankie/Documents/SOURCE/SAMPLES/interactions/commit-log/commit.log
+[main] - Readers [A=2, B=3]
+[Thread-3] - Running in READER mode
 [READER-2] - A: 109: TSpWtrjouG
 [READER-2] - A: 110: yNnGsuZorhOOCjdWSLvbCBX
 [READER-2] - A: 111: VhNJqXpcJRCaIRWupKoTeWp
@@ -77,3 +86,7 @@ Start the write service
 Ctrl+c
 ```
 
+#Future Improvements
+
+1. More testing.
+2. Rolling file based on date or size or start time.
