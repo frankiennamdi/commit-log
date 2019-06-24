@@ -11,13 +11,15 @@ and the read service consumes it.
 
 # Tests
 
-Test are included and test the reading and writing of log information
+Test are included and test the reading and writing of log information.
 
 # Build
 
 ```
 ./gradlew clean build"
 ```
+
+executable is placed here **build/libs/commit-log-1.0-SNAPSHOT.jar**
 
 # Configuration
 
@@ -43,7 +45,12 @@ after a failed check.
 
 # ./log-service
 
-Is a wrapper script around commit uber jar for convenience
+Is a wrapper script around commit uber jar for convenience. If you do not have
+a linux terminal with exec command, you can execute the code directly through
+the
+```
+java -jar build/libs/commit-log-1.0-SNAPSHOT.jar -mode [WRITER|READER]
+```
 
 # Execution
 Here are instructions on how to execute the application. The log file is always
