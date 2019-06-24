@@ -41,7 +41,8 @@ class ReadWorker implements LogWorker {
           TimeUnit.MILLISECONDS.sleep(sleepTimeInMillis);
         }
       } catch (InterruptedException e) {
-        LOGGER.warn("Thread Interrupted {}");
+        LOGGER.warn(e.getMessage(), e);
+        throw new RuntimeException(e);
       }
     }
     concurrentCommitFileReader.close();

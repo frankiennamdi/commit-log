@@ -42,9 +42,8 @@ class WriteWorker implements LogWorker {
         LOGGER.info(msg);
 
       } catch (IOException | InterruptedException ex) {
-
+        LOGGER.warn(ex.getMessage(), ex);
         throw new RuntimeException(ex);
-
       }
     }
 

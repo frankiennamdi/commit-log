@@ -69,7 +69,7 @@ public class WriteService extends LogService {
         TimeUnit.SECONDS.sleep(sleepTimeInSeconds);
 
       } catch (InterruptedException e) {
-        LOGGER.warn("Thread Interrupted");
+        LOGGER.warn(e.getMessage(), e);
         throw new RuntimeException(e);
       }
     }
