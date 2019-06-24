@@ -17,7 +17,7 @@ public final class ConcurrentCommitFileReader implements Closeable {
 
   private final Scanner scanner;
 
-  private final ReentrantLock reentrantLock = new ReentrantLock();
+  private final Object fileAccess = new Object();
 
   private final String commitId;
 
@@ -40,10 +40,8 @@ public final class ConcurrentCommitFileReader implements Closeable {
    *
    * @returns
    */
-  public Optional<String> nextLine() throws InterruptedException {
-    ReentrantLock lock = this.reentrantLock;
-    lock.lockInterruptibly();
-    try {
+  public Optional<String> nextLine() {
+    synchronized (fileAccess) {
       if (scanner.hasNext()) {
         String line = scanner.nextLine();
         String fileCommitId = StringUtils.substringBefore(line, ":").trim();
@@ -51,13 +49,13 @@ public final class ConcurrentCommitFileReader implements Closeable {
       } else {
         return Optional.empty();
       }
-    } finally {
-      lock.unlock();
     }
   }
 
   @Override
   public void close() {
-    scanner.close();
+    synchronized (fileAccess) {
+      scanner.close();
+    }
   }
 }

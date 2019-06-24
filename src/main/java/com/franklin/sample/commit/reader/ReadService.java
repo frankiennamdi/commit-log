@@ -1,8 +1,8 @@
 package com.franklin.sample.commit.reader;
 
 import com.franklin.sample.commit.Config;
-import com.franklin.sample.commit.LogWorker;
 import com.franklin.sample.commit.LogService;
+import com.franklin.sample.commit.LogWorker;
 import com.franklin.sample.commit.Mode;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -10,10 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,22 +25,27 @@ public class ReadService extends LogService {
 
   private volatile boolean running;
 
-  private final ExecutorService executorService;
+  private final List<Thread> workerThreads = new ArrayList<>();
 
-  private final List<ReadWorker> readHandlers;
+  private final List<ReadWorker> readWorkers = new ArrayList<>();
 
   public ReadService(Config config, Path filePath) {
-    int totalNumberOfReaderThreads = config.getReaders().values().stream().mapToInt(Integer::intValue).sum();
-    this.executorService = Executors.newFixedThreadPool(totalNumberOfReaderThreads,
-            new CustomizableThreadFactory(Mode.READER.name() + "-"));
-    this.readHandlers = readWorkers(config, filePath);
+    ThreadFactory threadFactory = new CustomizableThreadFactory(Mode.READER.name() + "-");
+    List<ReadWorker> readWorkers = readWorkers(config, filePath);
+    for (ReadWorker readWorker : readWorkers) {
+      workerThreads.add(threadFactory.newThread(readWorker));
+      this.readWorkers.add(readWorker);
+    }
   }
 
   @Override
   public void run() {
     LOGGER.info("Running in {} mode", Mode.READER.name());
     running = true;
-    readHandlers.forEach(executorService::submit);
+    if (workerThreads.isEmpty()) {
+      throw new RuntimeException("No Reader Threads");
+    }
+    workerThreads.forEach(Thread::start);
     int sleepTimeInSeconds = 5;
     while (running) {
 
@@ -73,9 +78,11 @@ public class ReadService extends LogService {
     return readHandlers;
   }
 
-  public void shutdown() {
-    readHandlers.forEach(LogWorker::stop);
+  public void shutdown() throws InterruptedException {
+    readWorkers.forEach(LogWorker::stop);
+    for (Thread thread : workerThreads) {
+      thread.join();
+    }
     running = false;
-    executorService.shutdown();
   }
 }

@@ -6,6 +6,6 @@ package com.franklin.sample.commit;
 
 public abstract class LogService extends Thread {
 
-  public abstract void shutdown();
+  public abstract void shutdown() throws InterruptedException;
 
 }
