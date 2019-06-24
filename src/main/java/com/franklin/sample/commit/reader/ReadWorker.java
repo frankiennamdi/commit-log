@@ -41,12 +41,10 @@ class ReadWorker implements LogWorker {
           TimeUnit.MILLISECONDS.sleep(sleepTimeInMillis);
         }
       } catch (InterruptedException e) {
-        boolean interrupted = Thread.interrupted();
-        LOGGER.warn("Thread Interrupted {}", interrupted);
+        LOGGER.warn("Thread Interrupted {}");
       }
     }
-
-    LOGGER.info("Handler Shutdown");
     concurrentCommitFileReader.close();
+    LOGGER.info("Handler Shutdown");
   }
 }

@@ -19,7 +19,7 @@ class WriteWorker implements LogWorker {
 
   private final FileWriter fileWriter;
 
-  private volatile boolean run = true;
+  private volatile boolean running = true;
 
   WriteWorker(Path filePath, WriterCommitIdentification writerCommitIdentification) {
     this.fileWriter = new FileWriter(filePath, writerCommitIdentification);
@@ -30,7 +30,7 @@ class WriteWorker implements LogWorker {
     int min = 10;
     int max = 30;
     int thinkTimeInMills = 500;
-    while (run) {
+    while (running) {
       try {
 
         int length = ThreadLocalRandom.current().nextInt(min, max + 1);
@@ -52,6 +52,6 @@ class WriteWorker implements LogWorker {
   }
 
   public void stop() {
-    run = false;
+    running = false;
   }
 }

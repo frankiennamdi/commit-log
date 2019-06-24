@@ -70,7 +70,7 @@ public class WriteService extends LogService {
 
       } catch (InterruptedException e) {
         LOGGER.warn("Thread Interrupted");
-        Thread.interrupted();
+        throw new RuntimeException(e);
       }
     }
     LOGGER.info("WriteService shutdown");
@@ -81,7 +81,6 @@ public class WriteService extends LogService {
     for (Thread workerThread : workerThreads) {
       workerThread.join();
     }
-    running = false;
     running = false;
   }
 }

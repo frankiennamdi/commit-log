@@ -54,10 +54,8 @@ public class ReadService extends LogService {
         TimeUnit.SECONDS.sleep(sleepTimeInSeconds);
 
       } catch (InterruptedException e) {
-
         LOGGER.warn("Thread Interrupted");
-        Thread.interrupted();
-
+        throw new RuntimeException(e);
       }
     }
     LOGGER.info("ReadService shutdown");
