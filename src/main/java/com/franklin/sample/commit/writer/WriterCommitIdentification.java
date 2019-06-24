@@ -2,6 +2,10 @@ package com.franklin.sample.commit.writer;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * Commit Identification for a writer. Also a provider of
+ * unique id.
+ */
 class WriterCommitIdentification {
 
   private final String id;
@@ -16,7 +20,7 @@ class WriterCommitIdentification {
     return id;
   }
 
-  long getUuid() {
+  long getNextUUID() {
     return uuid.getAndAdd(1);
   }
 }

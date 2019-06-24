@@ -1,7 +1,7 @@
 package com.franklin.sample.commit.reader;
 
 import com.franklin.sample.commit.Config;
-import com.franklin.sample.commit.LogHandler;
+import com.franklin.sample.commit.LogWorker;
 import com.franklin.sample.commit.LogService;
 import com.franklin.sample.commit.Mode;
 import com.google.common.collect.Lists;
@@ -16,6 +16,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Provide reading services for the application
+ */
 public class ReadService extends LogService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ReadService.class);
@@ -24,13 +27,13 @@ public class ReadService extends LogService {
 
   private final ExecutorService executorService;
 
-  private final List<ReadHandler> readHandlers;
+  private final List<ReadWorker> readHandlers;
 
   public ReadService(Config config, Path filePath) {
     int totalNumberOfReaderThreads = config.getReaders().values().stream().mapToInt(Integer::intValue).sum();
     this.executorService = Executors.newFixedThreadPool(totalNumberOfReaderThreads,
             new CustomizableThreadFactory(Mode.READER.name() + "-"));
-    this.readHandlers = readHandlers(config, filePath);
+    this.readHandlers = readWorkers(config, filePath);
   }
 
   @Override
@@ -55,15 +58,15 @@ public class ReadService extends LogService {
     LOGGER.info("ReadService shutdown");
   }
 
-  private List<ReadHandler> readHandlers(Config config, Path filePath) {
-    List<ReadHandler> readHandlers = Lists.newArrayList();
+  private List<ReadWorker> readWorkers(Config config, Path filePath) {
+    List<ReadWorker> readHandlers = Lists.newArrayList();
     for (Map.Entry<String, Integer> reader : config.getReaders().entrySet()) {
 
       ConcurrentCommitFileReader concurrentCommitFileReader = new ConcurrentCommitFileReader(filePath.toFile(), reader.getKey());
 
       for (int i = 0; i < reader.getValue(); i++) {
 
-        readHandlers.add(new ReadHandler(concurrentCommitFileReader));
+        readHandlers.add(new ReadWorker(concurrentCommitFileReader));
 
       }
     }
@@ -71,7 +74,7 @@ public class ReadService extends LogService {
   }
 
   public void shutdown() {
-    readHandlers.forEach(LogHandler::stop);
+    readHandlers.forEach(LogWorker::stop);
     running = false;
     executorService.shutdown();
   }

@@ -1,6 +1,6 @@
 package com.franklin.sample.commit.writer;
 
-import com.franklin.sample.commit.LogHandler;
+import com.franklin.sample.commit.LogWorker;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,15 +10,18 @@ import java.nio.file.Path;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-class WriteHandler implements LogHandler {
+/**
+ * Worker for writing
+ */
+class WriteWorker implements LogWorker {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(WriteHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(WriteWorker.class);
 
   private final FileWriter fileWriter;
 
   private volatile boolean run = true;
 
-  WriteHandler(Path filePath, WriterCommitIdentification writerCommitIdentification) {
+  WriteWorker(Path filePath, WriterCommitIdentification writerCommitIdentification) {
     this.fileWriter = new FileWriter(filePath, writerCommitIdentification);
   }
 

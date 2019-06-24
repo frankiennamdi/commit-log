@@ -10,8 +10,8 @@ import java.util.Scanner;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Allows multiple threads with the same {@link #commitId} to read a file, with
- * each thread reading the next unread line
+ * Allows multiple threads with the same {@link #commitId} to read the commit log file, with
+ * each thread reading the next unread line, sleeping if no lines are available yet.
  */
 public final class ConcurrentCommitFileReader implements Closeable {
 

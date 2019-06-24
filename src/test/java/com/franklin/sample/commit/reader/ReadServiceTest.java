@@ -29,7 +29,7 @@ public class ReadServiceTest {
   public OutputCapture outputCapture = new OutputCapture();
 
   @Test
-  public void testReadFile() throws URISyntaxException, InterruptedException, IOException {
+  public void testCanReadCommitLog() throws URISyntaxException, InterruptedException, IOException {
     ClassLoader classLoader = MoreObjects.firstNonNull(Thread.currentThread().getContextClassLoader(),
             ReadServiceTest.class.getClassLoader());
     URI uri = classLoader.getResource("sample_files/sample_commit.log").toURI();

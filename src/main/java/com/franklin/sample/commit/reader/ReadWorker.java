@@ -1,21 +1,24 @@
 package com.franklin.sample.commit.reader;
 
-import com.franklin.sample.commit.LogHandler;
+import com.franklin.sample.commit.LogWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-class ReadHandler implements LogHandler {
+/**
+ * Worker for reading file.
+ */
+class ReadWorker implements LogWorker {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(ReadHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ReadWorker.class);
 
   private volatile boolean running = true;
 
   private final ConcurrentCommitFileReader concurrentCommitFileReader;
 
-  ReadHandler(ConcurrentCommitFileReader concurrentCommitFileReader) {
+  ReadWorker(ConcurrentCommitFileReader concurrentCommitFileReader) {
     this.concurrentCommitFileReader = concurrentCommitFileReader;
   }
 

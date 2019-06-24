@@ -20,7 +20,7 @@ class FileWriter {
 
   String write(String data) throws IOException {
     String msg = MessageFormatter.arrayFormat("{}: {}: {}",
-            new String[]{writerCommitIdentification.getId(), Long.toString(writerCommitIdentification.getUuid()), data}).getMessage();
+            new String[]{writerCommitIdentification.getId(), Long.toString(writerCommitIdentification.getNextUUID()), data}).getMessage();
     Files.write(filePath, (msg + "\n").getBytes(), StandardOpenOption.APPEND);
     return msg;
   }

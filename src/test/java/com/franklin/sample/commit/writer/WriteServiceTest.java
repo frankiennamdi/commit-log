@@ -29,7 +29,7 @@ public class WriteServiceTest {
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
   @Test
-  public void testWrite() throws IOException, InterruptedException {
+  public void testCanWriteCommitLog() throws IOException, InterruptedException {
     String path = temporaryFolder.newFolder().getAbsolutePath();
     Config config = new Config();
     config.setWriters(ImmutableMap.<String, Integer>builder()
