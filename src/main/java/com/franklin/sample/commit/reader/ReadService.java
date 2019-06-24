@@ -41,10 +41,10 @@ public class ReadService extends LogService {
   @Override
   public void run() {
     LOGGER.info("Running in {} mode", Mode.READER.name());
-    running = true;
-    if (workerThreads.isEmpty()) {
-      throw new RuntimeException("No Reader Threads");
+    if (workerThreads.isEmpty() || readWorkers.isEmpty()) {
+      throw new RuntimeException("No Reader Threads or Workers");
     }
+    running = true;
     workerThreads.forEach(Thread::start);
     int sleepTimeInSeconds = 5;
     while (running) {

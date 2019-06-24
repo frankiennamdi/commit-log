@@ -56,6 +56,9 @@ public class WriteService extends LogService {
   @Override
   public void run() {
     LOGGER.info("Running in {} mode", Mode.WRITER.name());
+    if (workerThreads.isEmpty() || writeWorkers.isEmpty()) {
+      throw new RuntimeException("No Writer Threads or Workers");
+    }
     running = true;
     workerThreads.forEach(Thread::start);
     int sleepTimeInSeconds = 5;
