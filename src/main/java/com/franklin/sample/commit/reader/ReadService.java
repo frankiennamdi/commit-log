@@ -61,13 +61,10 @@ public class ReadService extends LogService {
   private List<ReadWorker> createReadWorkers(Config config, Path filePath) {
     List<ReadWorker> readHandlers = Lists.newArrayList();
     for (Map.Entry<String, Integer> reader : config.getReaders().entrySet()) {
-
-      ConcurrentCommitFileReader concurrentCommitFileReader = new ConcurrentCommitFileReader(filePath.toFile(), reader.getKey());
-
+      ConcurrentCommitFileReader concurrentCommitFileReader =
+              new ConcurrentCommitFileReader(filePath.toFile(), reader.getKey());
       for (int i = 0; i < reader.getValue(); i++) {
-
         readHandlers.add(new ReadWorker(concurrentCommitFileReader));
-
       }
     }
     return readHandlers;
