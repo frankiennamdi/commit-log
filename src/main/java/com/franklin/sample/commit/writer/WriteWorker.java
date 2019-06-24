@@ -50,6 +50,7 @@ class WriteWorker implements LogWorker {
     LOGGER.info("Handler Shutdown");
   }
 
+  @Override
   public void stop() {
     running = false;
   }
