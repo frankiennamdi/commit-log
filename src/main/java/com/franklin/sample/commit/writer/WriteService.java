@@ -63,11 +63,8 @@ public class WriteService extends LogService {
     workerThreads.forEach(Thread::start);
     int sleepTimeInSeconds = 5;
     while (running) {
-
       try {
-
         TimeUnit.SECONDS.sleep(sleepTimeInSeconds);
-
       } catch (InterruptedException e) {
         LOGGER.warn(e.getMessage(), e);
         throw new RuntimeException(e);

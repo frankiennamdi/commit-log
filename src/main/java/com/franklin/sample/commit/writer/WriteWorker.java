@@ -32,9 +32,7 @@ class WriteWorker implements LogWorker {
     int thinkTimeInMills = 500;
     while (running) {
       try {
-
         int length = ThreadLocalRandom.current().nextInt(min, max + 1);
-
         String data = RandomStringUtils.randomAlphabetic(length);
         String msg = fileWriter.write(data);
 
@@ -46,7 +44,6 @@ class WriteWorker implements LogWorker {
         throw new RuntimeException(ex);
       }
     }
-
     LOGGER.info("Handler Shutdown");
   }
 
