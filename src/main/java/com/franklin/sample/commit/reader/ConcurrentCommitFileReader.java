@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Allows multiple threads with the same {@link #commitId} to read the commit log file, with
@@ -37,8 +36,6 @@ public final class ConcurrentCommitFileReader implements Closeable {
 
   /**
    * Read the next line
-   *
-   * @returns
    */
   public Optional<String> nextLine() {
     synchronized (fileAccess) {
