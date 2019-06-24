@@ -12,7 +12,7 @@
     </encoder>
   </appender>
 
-  <logger name="com.franklin.sample" level="INFO" additivity="false">
+  <logger name="com.franklin.sample" level="INFO">
     <appender-ref ref="STDOUT"/>
   </logger>
   <root level="ERROR">

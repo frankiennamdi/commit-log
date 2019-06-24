@@ -11,7 +11,7 @@
     </encoder>
   </appender>
 
-  <logger name="com.franklin.samples" level="INFO" additivity="false">
+  <logger name="com.franklin.samples" level="INFO">
     <appender-ref ref="APP_STDOUT"/>
   </logger>
   <root level="INFO">
