@@ -23,6 +23,7 @@ Test are included and test the reading and writing of log information
 
 The configuration property file is located in **config/application.properties** directory.
 If the path of the log location is not absolute the log is written in the present working directory.
+You can change the content of this file and restart the service. 
 
 The current content:
 
