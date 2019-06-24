@@ -36,6 +36,7 @@ class ReadWorker implements LogWorker {
         Optional<String> nextLine = concurrentCommitFileReader.nextLine();
         if (nextLine.isPresent()) {
           LOGGER.info(nextLine.get());
+          TimeUnit.MILLISECONDS.sleep(sleepTimeInMillis);
         } else {
           TimeUnit.MILLISECONDS.sleep(sleepTimeInMillis);
         }

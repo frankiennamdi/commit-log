@@ -31,10 +31,10 @@ public class ReadService extends LogService {
 
   public ReadService(Config config, Path filePath) {
     ThreadFactory threadFactory = new CustomizableThreadFactory(Mode.READER.name() + "-");
-    List<ReadWorker> readWorkers = readWorkers(config, filePath);
-    for (ReadWorker readWorker : readWorkers) {
+    List<ReadWorker> workers = createReadWorkers(config, filePath);
+    for (ReadWorker readWorker : workers) {
       workerThreads.add(threadFactory.newThread(readWorker));
-      this.readWorkers.add(readWorker);
+      readWorkers.add(readWorker);
     }
   }
 
@@ -63,7 +63,7 @@ public class ReadService extends LogService {
     LOGGER.info("ReadService shutdown");
   }
 
-  private List<ReadWorker> readWorkers(Config config, Path filePath) {
+  private List<ReadWorker> createReadWorkers(Config config, Path filePath) {
     List<ReadWorker> readHandlers = Lists.newArrayList();
     for (Map.Entry<String, Integer> reader : config.getReaders().entrySet()) {
 

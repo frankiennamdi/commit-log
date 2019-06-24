@@ -13,7 +13,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
@@ -32,16 +31,16 @@ public class WriteService extends LogService {
 
   public WriteService(Config config, Path filePath) {
     ThreadFactory threadFactory = new CustomizableThreadFactory(Mode.WRITER.name() + "-");
-    List<LogWorker> readWorkers = writeWorkers(config, filePath);
-    for (LogWorker writeWorker : readWorkers) {
+    List<WriteWorker> workers = createWriteWorkers(config, filePath);
+    for (WriteWorker writeWorker : workers) {
       workerThreads.add(threadFactory.newThread(writeWorker));
-      this.writeWorkers.add(writeWorker);
+      writeWorkers.add(writeWorker);
     }
   }
 
-  private List<LogWorker> writeWorkers(Config config, Path filePath) {
+  private List<WriteWorker> createWriteWorkers(Config config, Path filePath) {
 
-    List<LogWorker> writeHandlers = Lists.newArrayList();
+    List<WriteWorker> writeHandlers = Lists.newArrayList();
 
     for (Map.Entry<String, Integer> writer : config.getWriters().entrySet()) {
 
