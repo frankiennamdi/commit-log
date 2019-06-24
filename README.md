@@ -47,7 +47,8 @@ after a failed check.
 
 Is a wrapper script around commit uber jar for convenience. If you do not have
 a linux terminal with exec command, you can execute the code directly through
-the
+the following command:
+
 ```
 java -jar build/libs/commit-log-1.0-SNAPSHOT.jar -mode [WRITER|READER]
 ```
