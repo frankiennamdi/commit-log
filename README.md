@@ -29,6 +29,10 @@ location is not absolute the log is written in the present working directory.
 The writer must be started before the reader. If this order is not followed the reader shutdowns
 after a failed check.
 
+# ./log-service
+
+Is a wrapper script around commit uber jar for convenience
+
 # Execution
 Below are some examples of how to execute the application. The log file is always
 recreated, in the future we can configure it to append and roll over as improvements.
