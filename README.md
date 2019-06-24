@@ -24,6 +24,17 @@ Test are included and test the reading and writing of log information
 The configuration property file is located in **config/application.properties** directory.
 If the path of the log location is not absolute the log is written in the present working directory.
 
+The current content:
+
+```
+app.log-service.writers.A=2
+app.log-service.writers.B=3
+app.log-service.readers.A=2
+app.log-service.readers.B=3
+app.log-service.logPath=commit.log
+```
+
+
 # Constraints
 
 The writer must be started before the reader. If this order is not followed the reader shutdowns
